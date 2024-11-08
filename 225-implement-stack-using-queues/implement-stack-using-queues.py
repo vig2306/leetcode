@@ -18,8 +18,10 @@ class MyStack:
         #     return -1
 
         top_num = self.q1.pop()
-        if len(self.q2) > 0:
-            self.q1.append(self.q2.pop())
+        while len(self.q2) > 1:
+            curr_top = self.q2.pop(0)
+            self.q1.append(curr_top)
+        self.q1, self.q2 = self.q2, self.q1
         return top_num
 
     def top(self) -> int:
