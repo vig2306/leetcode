@@ -5,6 +5,17 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    def dfs(self, p, q):
+        if not p and not q:
+            return True
+        if not p or not q:
+            return False
+        if p.val != q.val:
+            return False
+        left = self.dfs(p.left, q.left)
+        right = self.dfs(p.right, q.right)
+        return  left and right
+
     def bfs(self, p, q):
         queue1 = [p]
         queue2 = [q]
@@ -42,12 +53,14 @@ class Solution:
         return True
             
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-        if p is None and q is None:
-            return True
-        if p is None and q is not None or p is not None and q is None:
-            return False
-        val = self.bfs(p,q)
-
+        val = self.dfs(p,q)
         return val
+        # if p is None and q is None:
+        #     return True
+        # if p is None and q is not None or p is not None and q is None:
+        #     return False
+        # val = self.bfs(p,q)
+
+        # return val
 
         
