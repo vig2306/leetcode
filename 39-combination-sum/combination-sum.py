@@ -1,25 +1,23 @@
 class Solution:
-    def recursion(self, nums, index, subset, target, curr_sum):
-        if curr_sum > target or index >= len(nums):
+    def recursion(self, index, target, nums, subset):
+        if index == len(nums):
+            if target == 0:
+                self.result.append(subset.copy())
             return
+        #PICK Element if less than curr target value
+        if nums[index] <= target:
+            subset.append(nums[index])
+            self.recursion(index, target - nums[index], nums, subset)
+            subset.pop()
 
-        if curr_sum == target:
-            self.result.append(subset.copy())
-            return
-
-        subset.append(nums[index])
-        self.recursion(nums, index, subset, target, curr_sum+nums[index])
-        subset.pop()
-        self.recursion(nums, index+1, subset, target, curr_sum)
+        
+        self.recursion(index+1, target, nums, subset)
 
         return
-        
 
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         self.result = []
-        self.recursion(candidates, 0, [], target, 0)
+        self.recursion(0, target, candidates, [])
 
         return self.result
-
-
         
