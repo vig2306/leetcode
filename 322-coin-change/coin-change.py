@@ -23,7 +23,19 @@ class Solution:
             
     def coinChange(self, coins: List[int], amount: int) -> int:
         self.memo = [-1] * (amount+1) 
-        ans = self.recursion(coins, amount)
-        return -1 if ans == float('inf') else ans
+        self.tabulate = [float('inf')] *(amount+1)
+        self.tabulate[0] = 0
+        for amt in range(1, amount+1):
+            ans = float('inf')
+            take = float('inf')
+            for coin in coins:
+                if amt - coin >= 0:
+                    take = 1 + self.tabulate[amt-coin]
+                ans = min(take, ans)
+            self.tabulate[amt] = ans
+
+
+        # ans = self.recursion(coins, amount)
+        return -1 if self.tabulate[amount] == float('inf') else self.tabulate[amount]
 
         
