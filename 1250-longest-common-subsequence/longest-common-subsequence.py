@@ -17,6 +17,28 @@ class Solution:
         return ans
 
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        # 2D DP:
+        n1 = len(text1)
+        n2 = len(text2)
+        tabulate = []
+        for i in range(len(text1)+1):
+            temp = []
+            for j in range(len(text2)+1):
+                temp.append(0)
+            tabulate.append(temp)
+        
+        for i in range(1, len(text1)+1):
+            for j in range(1, len(text2)+1):
+                if text1[i-1] == text2[j-1]:
+                    tabulate[i][j] = 1 + tabulate[i-1][j-1]
+                
+                else:
+                    tabulate[i][j] = max(tabulate[i-1][j], tabulate[i][j-1])
+        
+        return tabulate[n1][n2]
+
+
+        # Recursive Memo
         self.memo = []
         for i in range(len(text1)):
             temp = []
