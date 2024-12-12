@@ -9,7 +9,9 @@ class Solution:
             top = int(top**0.5)
             heapq.heappush(max_heap, -top)
             k = k-1
-        
-        return -(sum(max_heap))
+        result = 0
+        while max_heap:
+            result -= heapq.heappop(max_heap)
+        return result
 
         
