@@ -6,17 +6,17 @@ class Solution:
             sorted_nums.append((nums[i], i))
         
         sorted_nums.sort()
-        marked_index = set()
+        marked = [0]*len(nums)
         
         for i in range(len(sorted_nums)):
             num, index = sorted_nums[i]
-            if index not in marked_index:
+            if marked[index] == 0:
                 score += num
-                marked_index.add(index)
-                marked_index.add(index-1)
-                marked_index.add(index+1)
-            
-
+                marked[index] = 1
+                if index - 1 >= 0:
+                    marked[index-1] = 1
+                if index + 1 < len(nums):
+                    marked[index+1] = 1
 
         return score
 
