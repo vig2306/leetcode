@@ -6,7 +6,7 @@ class Solution:
         while i < len(nums):
             curr_max, max_idx = nums[i], i
             curr_min, min_idx = nums[i], i
-            j = i + 1
+            # j = i + 1
 
             while j < len(nums) and abs(nums[j] - curr_max) <= 2 and abs(nums[j] - curr_min) <= 2:
                 if nums[j] >= curr_max:
@@ -31,6 +31,7 @@ class Solution:
 
             repeated_size = j - 1 - max_i_giving_valid_window_with_j + 1
             count -= (repeated_size * (repeated_size + 1)) // 2
+            i = max_i_giving_valid_window_with_j
 
         return count
 
