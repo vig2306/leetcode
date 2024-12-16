@@ -12,7 +12,10 @@ class Solution:
             prev_ratio = classes[i][0]/classes[i][1]
             new_ratio = (classes[i][0]+1)/(classes[i][1]+1)
             change = new_ratio - prev_ratio
-            heapq.heappush(change_heap, (-change, [classes[i][0]+1, classes[i][1]+1]))
+            change_heap.append((-change, [classes[i][0]+1, classes[i][1]+1]))
+            # heapq.heappush(change_heap, (-change, [classes[i][0]+1, classes[i][1]+1]))
+        
+        heapq.heapify(change_heap)
         
        
         
