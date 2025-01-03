@@ -1,17 +1,23 @@
 class Solution:
-    def recursion(self, nums, subset, index):
-        if index == len(nums):
-            self.result.append(subset.copy())
-            return
-        subset.append(nums[index])
-        self.recursion(nums, subset, index+1)
-        subset.pop()
-        self.recursion(nums, subset, index+1)
+    def recursion(self, nums, res, index):
+        if index == -1:
+            self.results.append(res.copy())
+            return 
+        
+        res.append(nums[index])
+        self.recursion(nums, res, index-1)
+        res.pop()
+        self.recursion(nums, res, index-1)
 
         return
 
+
+
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        self.result = []
-        self.recursion(nums, [], 0)
-        return self.result
+
+        self.results = []
+        self.recursion(nums, [], len(nums)-1)
+
+        return self.results
+        
         
