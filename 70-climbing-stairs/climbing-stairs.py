@@ -1,7 +1,12 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
+        #Why is this similar to fibonnacci types:
+        #Step 3 = 3 ways
+        #Step 4 = 5 ways
+
+    
         stepCount = []
-        #for 0 steps:
+        #For n = 1 and 2
         stepCount.append(1)
         stepCount.append(2)
 
@@ -10,4 +15,3 @@ class Solution:
             stepCount.append(count)
         
         return stepCount[n-1]
-        
