@@ -1,18 +1,36 @@
 class Solution:
-
+    #Space Optimised DP
     def minCostClimbingStairs(self, cost: List[int]) -> int:
-        dp = [-1]*len(cost)
-        n = len(dp)
-        dp[0] = cost[0]
-        dp[1] = cost[1]
-        for i in range(2, len(dp)):
+        n = len(cost)
+        two_prev_step = cost[0]
+        one_prev_step = cost[1]
+        for i in range(2, n):
 
-            one_step_cost = cost[i] + dp[i-1]
-            two_step_cost = cost[i] + dp[i-2]
+            curr_cost = min(cost[i]+one_prev_step, cost[i]+two_prev_step)
 
-            dp[i] = min(one_step_cost, two_step_cost)
+            two_prev_step = one_prev_step
+            one_prev_step = curr_cost
 
-        return min(dp[n-1], dp[n-2])
+        return min(two_prev_step, one_prev_step)
+
+
+    #Tabulation
+    # def minCostClimbingStairs(self, cost: List[int]) -> int:
+    #     dp = [-1]*len(cost)
+    #     n = len(dp)
+    #     dp[0] = cost[0]
+    #     dp[1] = cost[1]
+    #     for i in range(2, len(dp)):
+
+    #         one_step_cost = cost[i] + dp[i-1]
+    #         two_step_cost = cost[i] + dp[i-2]
+
+    #         dp[i] = min(one_step_cost, two_step_cost)
+
+    #     return min(dp[n-1], dp[n-2])
+
+
+    #Recursion with Memo 
 
     # def recursion(self, cost, index):
     #     if index == 0 or index == 1:
