@@ -1,26 +1,41 @@
 class Solution:
 
-    def recursion(self, cost, index):
-        if index == 0 or index == 1:
-            return cost[index]
-        
-        if self.memo[index] != -1:
-            return self.memo[index]
-        
-        one_step_cost = cost[index] + self.recursion(cost, index-1)
-        two_step_cost = cost[index] + self.recursion(cost, index-2)
-
-        self.memo[index] = min(one_step_cost, two_step_cost)
-
-        return self.memo[index]
-  
     def minCostClimbingStairs(self, cost: List[int]) -> int:
-        self.memo = [-1]*len(cost)
-        cost1 = self.recursion(cost, len(cost)-1)
-        cost2 = self.recursion(cost, len(cost)-2)
-        min_cost = min(cost1, cost2)
+        dp = [-1]*len(cost)
+        n = len(dp)
+        dp[0] = cost[0]
+        dp[1] = cost[1]
+        for i in range(2, len(dp)):
 
-        return min_cost
+            one_step_cost = cost[i] + dp[i-1]
+            two_step_cost = cost[i] + dp[i-2]
+
+            dp[i] = min(one_step_cost, two_step_cost)
+
+        return min(dp[n-1], dp[n-2])
+
+    # def recursion(self, cost, index):
+    #     if index == 0 or index == 1:
+    #         self.memo[index] = cost[index]
+    #         return cost[index]
+        
+    #     if self.memo[index] != -1:
+    #         return self.memo[index]
+        
+    #     one_step_cost = cost[index] + self.recursion(cost, index-1)
+    #     two_step_cost = cost[index] + self.recursion(cost, index-2)
+
+    #     self.memo[index] = min(one_step_cost, two_step_cost)
+
+    #     return self.memo[index]
+  
+    # def minCostClimbingStairs(self, cost: List[int]) -> int:
+    #     self.memo = [-1]*len(cost)
+    #     cost1 = self.recursion(cost, len(cost)-1)
+    #     cost2 = self.recursion(cost, len(cost)-2)
+    #     min_cost = min(cost1, cost2)
+
+    #     return min_cost
         
 
     #Recursion
