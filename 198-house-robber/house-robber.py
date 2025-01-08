@@ -2,19 +2,33 @@ class Solution:
 
     def rob(self, nums: List[int]) -> int:
         n = len(nums)
-        dp = [-1]*n
-        dp[0] = nums[0]
+        two_house = 0
+        one_house = nums[0]
         for index in range(1, n):
-            if index - 2 < 0:
-                take = nums[index]
-            else:
-                take = nums[index] + dp[index-2]
 
-            not_take = dp[index-1]
+            take = nums[index] + two_house
+            not_take = one_house
 
-            dp[index] = max(take, not_take)
+            two_house = one_house
+            one_house = max(take, not_take)
 
-        return dp[n-1]
+        return one_house
+
+    # def rob(self, nums: List[int]) -> int:
+    #     n = len(nums)
+    #     dp = [-1]*n
+    #     dp[0] = nums[0]
+    #     for index in range(1, n):
+    #         if index - 2 < 0:
+    #             take = nums[index]
+    #         else:
+    #             take = nums[index] + dp[index-2]
+
+    #         not_take = dp[index-1]
+
+    #         dp[index] = max(take, not_take)
+
+    #     return dp[n-1]
 
     # def memoization(self, nums, index):
     #     if index < 0:
