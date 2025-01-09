@@ -1,28 +1,49 @@
 class Solution:
+    def recursion(self, nums, index):
+        if index < 0:
+            return 0
+        
+        if index == 0:
+            self.memo[index] = nums[index]
+            return nums[index]
+        
+        if self.memo[index] != -1:
+            return self.memo[index]
+
+        take = nums[index] + self.recursion(nums, index-2)
+        not_take= self.recursion(nums, index-1)
+
+        self.memo[index] = max(take, not_take)
+
+        return self.memo[index]
+
     def rob(self, nums: List[int]) -> int:
         if len(nums) == 1:
             return nums[0]
-        two_max = 0
-        one_max = 0
-        ans = 0
-        for index in range(len(nums)-1, 0, -1):
-            take = nums[index] + two_max
-            not_take = one_max
-            ans = max(take, not_take)
-            two_max = one_max
-            one_max = ans
-        first_max = one_max
-        two_max = 0
-        one_max = 0
-        ans = 0
-        for index in range(len(nums)-2, -1, -1):
-            take = nums[index] + two_max
-            not_take = one_max
-            ans = max(take, not_take)
-            two_max = one_max
-            one_max = ans
-        
+        n = len(nums)
+        self.memo = [-1]*(n-1)
+        res1 = self.recursion(nums[:n-1], n-2)
+        self.memo = [-1]*(n-1)
+        res2 = self.recursion(nums[1:], n-2)
 
-        second_max = one_max
-        return max(first_max, second_max)
+        return max(res1, res2)
+
+    # def recursion(self, nums, index):
+    #     if index < 0:
+    #         return 0
+        
+    #     if index == 0:
+    #         return nums[index]
+        
+    #     take = nums[index] + self.recursion(nums, index-2)
+    #     not_take= self.recursion(nums, index-1)
+
+    #     return max(take, not_take)
+
+    # def rob(self, nums: List[int]) -> int:
+    #     n = len(nums)
+    #     res1 = self.recursion(nums[:n-1], n-2)
+    #     res2 = self.recursion(nums[1:], n-2)
+
+    #     return max(res1, res2)
         
