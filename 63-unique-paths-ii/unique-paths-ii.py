@@ -1,4 +1,29 @@
 class Solution:
+    #Space Optimised DP:
+    def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
+        m = len(obstacleGrid)
+        n = len(obstacleGrid[0])
+        if obstacleGrid[m-1][n-1] == 1:
+            return 0
+        prev = [-1 for _ in range(n)]
+        for i in range(0, m):
+            curr = [-1 for _ in range(n)]
+            for j in range(0, n):
+                if i==0 and j==0:
+                    curr[j] = 1
+                    continue
+                up = 0
+                left = 0
+                if i > 0 and obstacleGrid[i-1][j] == 0:
+                    up = prev[j]
+                if j > 0 and obstacleGrid[i][j-1] == 0:
+                    left = curr[j-1]
+                
+                curr[j] = up + left
+            prev = curr
+
+        return prev[n-1]
+
     #Tabulation:
     def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
         m = len(obstacleGrid)
