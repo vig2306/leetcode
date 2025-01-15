@@ -1,24 +1,48 @@
 class Solution:
-    #Tabulation
+    #Space optimised
     def minPathSum(self, grid: List[List[int]]) -> int:
         m = len(grid)
         n = len(grid[0])
-        dp = [[-1 for _ in range(n)] for _ in range(m)]
+        prev = [0 for _ in range(n)]
         for i in range(m):
+            curr = [0 for _ in range(n)]
             for j in range(n):
                 if i == 0 and j == 0:
-                    dp[i][j] = grid[i][j]
+                    curr[j] = grid[i][j]
                     continue
                 up = float('inf')
                 left = float('inf')
                 if i > 0:
-                    up = grid[i][j] + dp[i-1][j]
+                    up = grid[i][j] + prev[j]
                 if j > 0:
-                    left = grid[i][j] + dp[i][j-1]
+                    left = grid[i][j] + curr[j-1]
                 
-                dp[i][j] = min(up, left)
+                curr[j] = min(up, left)
+            
+            prev = curr
 
-        return dp[m-1][n-1]
+        return prev[n-1]
+
+    # #Tabulation
+    # def minPathSum(self, grid: List[List[int]]) -> int:
+    #     m = len(grid)
+    #     n = len(grid[0])
+    #     dp = [[-1 for _ in range(n)] for _ in range(m)]
+    #     for i in range(m):
+    #         for j in range(n):
+    #             if i == 0 and j == 0:
+    #                 dp[i][j] = grid[i][j]
+    #                 continue
+    #             up = float('inf')
+    #             left = float('inf')
+    #             if i > 0:
+    #                 up = grid[i][j] + dp[i-1][j]
+    #             if j > 0:
+    #                 left = grid[i][j] + dp[i][j-1]
+                
+    #             dp[i][j] = min(up, left)
+
+    #     return dp[m-1][n-1]
 
     #Memo
     # def recursion(self, grid, i, j):
