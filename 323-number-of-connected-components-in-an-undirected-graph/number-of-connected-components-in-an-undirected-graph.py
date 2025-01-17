@@ -4,20 +4,18 @@ class Solution:
         visited[start] = 1
         while queue:
             node = queue.pop()
-            for i in range(len(graph[node])):
-                if visited[graph[node][i]] == 0:
-                    queue.append(graph[node][i])
-                    visited[graph[node][i]] = 1
+            for neighbor in graph[node]:
+                if visited[neighbor] == 0:
+                    queue.append(neighbor)
+                    visited[neighbor] = 1
         
         return visited
 
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
-        graph = []
-        for i in range(n):
-            graph.append([])
+        graph = [[] for _ in range(n)]
         
-        for i in range(len(edges)):
-            a, b = edges[i][0], edges[i][1]
+        for edge in edges:
+            a, b = edge[0], edge[1]
             graph[a].append(b)
             graph[b].append(a)
         
