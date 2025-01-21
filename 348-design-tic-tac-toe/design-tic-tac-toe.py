@@ -1,20 +1,5 @@
 class TicTacToe:
-
-
-    0,0
-    1,1
-    2,2
-
-    [0, 1]
-    [1, 2]
-    rowA = [1, 0]
-    rowB = [0, 1]
-    colA = [0, 1]
-    colB = [0, 1]
-    diag1A = 0
-    diag2A = 0
-    diag1B = 0
-    diag2B = 0
+    
 
     def __init__(self, n: int):
         self.n = n
@@ -60,10 +45,6 @@ class TicTacToe:
         
         return 0
         
-
-        
-        
-
 
 # Your TicTacToe object will be instantiated and called as such:
 # obj = TicTacToe(n)
