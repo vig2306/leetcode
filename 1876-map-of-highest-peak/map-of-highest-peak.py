@@ -20,15 +20,13 @@ class Solution:
         
 
         while queue:
-            length = len(queue)
-            for _ in range(length):
-                cost, i, j = queue.popleft()
-                for direc in directions:
-                    x = i + direc[0]
-                    y = j + direc[1]
-                    if self.isValid(x,y,m,n) and heights[x][y] == -1:
-                        heights[x][y] = cost+1
-                        queue.append((cost+1,x,y))
+            cost, i, j = queue.popleft()
+            for direc in directions:
+                x = i + direc[0]
+                y = j + direc[1]
+                if self.isValid(x,y,m,n) and heights[x][y] == -1:
+                    heights[x][y] = cost+1
+                    queue.append((cost+1,x,y))
         
         return heights
 
